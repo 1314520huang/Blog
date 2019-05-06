@@ -1,5 +1,7 @@
 package com.netstudy.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.netstudy.bean.Board;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BoardService extends IService<Board> {
 
+    IPage getPage(Page page);
 }

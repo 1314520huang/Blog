@@ -1,11 +1,14 @@
 package com.netstudy.service.impl;
 
 import com.netstudy.bean.Collect;
+import com.netstudy.common.utils.normal.LoginUtils;
 import com.netstudy.dao.CollectMapper;
 import com.netstudy.service.CollectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -20,6 +23,13 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
 
     @Autowired
     private CollectMapper collectMapper;
+
+    @Override
+    public void addCollect(HttpServletRequest request, Collect collect) {
+
+        collect.setUserId(LoginUtils.getUser(request).getId());
+        collectMapper.insert(collect);
+    }
 
     @Override
     public int findIsLikeByUserIdAndBlogId(long userId, long blogId) {

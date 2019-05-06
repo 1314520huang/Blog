@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -29,14 +28,13 @@ public class BlogController extends BaseController {
     @Autowired
     private BlogService blogServiceImpl;
 
-    @GetMapping("")
+    @GetMapping("/{type}")
     @ResponseBody
-    @Remarks("获取所有博客列表")
-    public AjaxResponse list() {
+    @Remarks("获取所有博客列表， type = 1 代表获取自己的博客")
+    public AjaxResponse list(HttpServletRequest request, @PathVariable int type) {
 
         AjaxResponse response = new AjaxResponse();
-        List<Blog> blogs = blogServiceImpl.list();
-        response.setData(blogs);
+        response.setData(blogServiceImpl.list(request, type));
         return response;
     }
 
@@ -55,8 +53,16 @@ public class BlogController extends BaseController {
     public AjaxResponse info(@PathVariable long id) {
 
         AjaxResponse response = new AjaxResponse();
-        Map<String, Object> map = blogServiceImpl.getDetail(id);
-        response.setData(map);
+        response.setData(blogServiceImpl.getDetail(id));
         return response;
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    @Remarks("伪删除博客")
+    public AjaxResponse delete(@PathVariable long id) {
+
+        blogServiceImpl.removeById(id);
+        return new AjaxResponse();
     }
 }

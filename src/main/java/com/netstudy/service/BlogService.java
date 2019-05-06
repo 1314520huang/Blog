@@ -3,6 +3,8 @@ package com.netstudy.service;
 import com.netstudy.bean.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +18,8 @@ import java.util.Map;
 public interface BlogService extends IService<Blog> {
 
     Map<String, Object> getDetail(long id);
+
+    boolean save(HttpServletRequest request, Blog blog);
+
+    List<Blog> list(HttpServletRequest request, int type);
 }

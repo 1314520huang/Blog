@@ -1,7 +1,12 @@
 package com.netstudy.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.netstudy.common.bean.AjaxResponse;
+import com.netstudy.common.bean.Remarks;
+import com.netstudy.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
@@ -17,4 +22,25 @@ import org.springframework.stereotype.Controller;
 @RequestMapping("/board")
 public class BoardController {
 
+    @Autowired
+    private BoardService boardServiceImpl;
+
+    @GetMapping("")
+    @ResponseBody
+    @Remarks("获取所有留言")
+    public AjaxResponse list(int pageIndex, int pageCount) {
+
+        AjaxResponse response = new AjaxResponse();
+        response.setData(boardServiceImpl.getPage(new Page(pageIndex, pageCount)));
+        return response;
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    @Remarks("伪删除留言")
+    public AjaxResponse delete(@PathVariable long id) {
+
+        boardServiceImpl.removeById(id);
+        return new AjaxResponse();
+    }
 }

@@ -1,7 +1,11 @@
 package com.netstudy.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.netstudy.bean.Discuss;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DiscussService extends IService<Discuss> {
 
+    IPage<Discuss> getPage(Page page, int type);
+
+    boolean save(HttpServletRequest request, Discuss discuss);
 }
