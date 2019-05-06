@@ -1,4 +1,4 @@
-package com.forstudy.common.exception;
+package com.netstudy.common.exception;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

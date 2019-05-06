@@ -1,4 +1,4 @@
-package com.forstudy.common.bean;
+package com.netstudy.common.bean;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

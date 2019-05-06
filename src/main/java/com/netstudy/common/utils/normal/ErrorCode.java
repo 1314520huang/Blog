@@ -1,4 +1,4 @@
-package com.forstudy.common.utils;
+package com.netstudy.common.utils.normal;
 
 /**
  * 操作码集合

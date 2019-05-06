@@ -4,6 +4,7 @@ import com.netstudy.bean.Collect;
 import com.netstudy.dao.CollectMapper;
 import com.netstudy.service.CollectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> implements CollectService {
 
+    @Autowired
+    private CollectMapper collectMapper;
+
+    @Override
+    public int findIsLikeByUserIdAndBlogId(long userId, long blogId) {
+
+        return collectMapper.findIsLikeByUserIdAndBlogId(userId, blogId);
+    }
 }

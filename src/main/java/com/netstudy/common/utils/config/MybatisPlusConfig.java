@@ -1,4 +1,4 @@
-package com.forstudy.common.utils.config;
+package com.netstudy.common.utils.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;

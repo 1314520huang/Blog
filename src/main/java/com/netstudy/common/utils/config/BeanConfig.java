@@ -1,4 +1,4 @@
-package com.forstudy.common.utils.config;
+package com.netstudy.common.utils.config;
 
 import com.mongodb.DB;
 import com.mongodb.MongoClient;

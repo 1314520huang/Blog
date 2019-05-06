@@ -2,6 +2,7 @@ package com.netstudy.service;
 
 import com.netstudy.bean.Collect;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CollectService extends IService<Collect> {
 
+    int findIsLikeByUserIdAndBlogId(long userId, long blogId);
 }

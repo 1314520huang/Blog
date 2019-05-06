@@ -3,6 +3,8 @@ package com.netstudy.service;
 import com.netstudy.bean.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Set;
+
 /**
  * <p>
  * 用户表 服务类
@@ -12,5 +14,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-05-05
  */
 public interface UserService extends IService<User> {
-
 }

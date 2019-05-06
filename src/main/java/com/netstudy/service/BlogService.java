@@ -3,6 +3,8 @@ package com.netstudy.service;
 import com.netstudy.bean.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
  * <p>
  * 博客表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BlogService extends IService<Blog> {
 
+    Map<String, Object> getDetail(long id);
 }

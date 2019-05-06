@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netstudy.dao.CollectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.netstudy.bean.Collect">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="blog_id" property="blogId" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, blog_id, create_time
+    </sql>
+
+    <!-- 查询当前博客是否被登录用户收藏 -->
+    <select id="findIsLikeByUserIdAndBlogId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(1) as sum from collect where user_id = #{userId} and blog_id = #{blogId}
+    </select>
+
+</mapper>

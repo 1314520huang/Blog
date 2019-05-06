@@ -2,6 +2,7 @@ package com.netstudy.dao;
 
 import com.netstudy.bean.Collect;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CollectMapper extends BaseMapper<Collect> {
 
+    int findIsLikeByUserIdAndBlogId(@Param("userId") long userId, @Param("blogId") long blogId);
 }

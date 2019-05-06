@@ -1,4 +1,4 @@
-package com.forstudy.common.filter;
+package com.netstudy.common.filter;
 
 import org.springframework.stereotype.Component;
 

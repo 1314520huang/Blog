@@ -1,4 +1,4 @@
-package com.netstudy.common.utils;
+package com.netstudy.common.utils.normal;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;

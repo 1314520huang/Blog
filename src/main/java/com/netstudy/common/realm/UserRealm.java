@@ -1,4 +1,4 @@
-package com.forstudy.common.realm;
+package com.netstudy.common.realm;
 
 import com.netstudy.service.UserRoleService;
 import com.netstudy.service.UserService;
@@ -34,8 +34,8 @@ public class UserRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         long id = (long)collection.getPrimaryPrincipal();
-//        Set<String> permissions = userRoleService.getPermissions(id);
-//        info.setStringPermissions(permissions);
+        Set<String> permissions = userRoleService.getPermissions(id);
+        info.setStringPermissions(permissions);
         return info;
     }
 

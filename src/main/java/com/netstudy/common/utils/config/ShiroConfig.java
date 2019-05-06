@@ -1,12 +1,15 @@
-package com.forstudy.common.utils.config;
+package com.netstudy.common.utils.config;
 
-import com.forstudy.common.bean.Remarks;
-import com.forstudy.common.realm.UserRealm;
+import com.netstudy.common.bean.Remarks;
+import com.netstudy.common.realm.UserRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
@@ -33,6 +36,9 @@ public class ShiroConfig {
 
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
         filterFactoryBean.setSecurityManager(securityManager);
+        Map<String, String> fileMaps = new HashMap<>();
+        filterFactoryBean.setLoginUrl("/toLogin");
+        filterFactoryBean.setFilterChainDefinitionMap(fileMaps);
         return filterFactoryBean;
     }
 }

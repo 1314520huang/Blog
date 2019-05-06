@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MyLikeService extends IService<MyLike> {
 
+    int getCountForLike(long blogId);
+
+    int getCountForNotLike(long blogId);
 }

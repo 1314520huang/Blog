@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MyLikeMapper extends BaseMapper<MyLike> {
 
+    int getCountForLike(long blogId);
+
+    int getCountForNotLike(long blogId);
 }

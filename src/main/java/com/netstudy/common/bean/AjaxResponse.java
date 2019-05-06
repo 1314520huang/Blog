@@ -1,6 +1,6 @@
-package com.forstudy.common.bean;
+package com.netstudy.common.bean;
 
-import com.forstudy.common.utils.ErrorCode;
+import com.netstudy.common.utils.normal.ErrorCode;
 
 import java.io.Serializable;
 

@@ -1,9 +1,11 @@
 package com.netstudy.common.utils.generator;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -53,7 +55,7 @@ public class CodeGenerate {
         pc.setServiceImpl("service" + rb.getString("className") + ".impl");
         pc.setEntity("bean" + rb.getString("className"));
         pc.setMapper("dao" + rb.getString("className"));
-        pc.setXml("mappers.xml" + rb.getString("className"));
+        pc.setXml("dao" + rb.getString("className") + ".xml");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -64,14 +66,19 @@ public class CodeGenerate {
             }
         };
         List<FileOutConfig> focList = new ArrayList<>();
-/*        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+
+        /*
+            生成xml文件
+         */
+        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return rb.getString("OutputDirXml") + "/mapper/" + rb.getString("className") + "/" + tableInfo.getEntityName() + StringPool.DOT_XML;
+                return rb.getString("OutputDirXml") + "/mappers/" + rb.getString("className") + "/" + tableInfo.getEntityName() + StringPool.DOT_XML;
             }
         });
- */
+
+
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
         mpg.setTemplate(new TemplateConfig().setXml(null));

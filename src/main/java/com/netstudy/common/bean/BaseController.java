@@ -1,9 +1,9 @@
-package com.forstudy.common.bean;
+package com.netstudy.common.bean;
 
-import com.forstudy.common.exception.AIException;
-import com.forstudy.common.exception.BusinessException;
-import com.forstudy.common.exception.SystemException;
-import com.forstudy.common.utils.ErrorCode;
+import com.netstudy.common.exception.AIException;
+import com.netstudy.common.exception.BusinessException;
+import com.netstudy.common.exception.SystemException;
+import com.netstudy.common.utils.normal.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;

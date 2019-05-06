@@ -1,4 +1,4 @@
-package com.forstudy.common.utils;
+package com.netstudy.common.utils.normal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

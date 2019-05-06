@@ -1,4 +1,4 @@
-package com.forstudy.common.exception;
+package com.netstudy.common.exception;
 
 public class BusinessException extends RuntimeException {
 
