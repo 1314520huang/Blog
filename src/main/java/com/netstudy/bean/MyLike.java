@@ -2,6 +2,8 @@ package com.netstudy.bean;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -44,6 +46,7 @@ public class MyLike implements Serializable {
     /**
      * 喜爱 -1 不喜欢 1 喜欢
      */
+    @TableLogic
     private Integer state;
 
 

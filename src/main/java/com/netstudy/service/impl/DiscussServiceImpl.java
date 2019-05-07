@@ -28,11 +28,12 @@ public class DiscussServiceImpl extends ServiceImpl<DiscussMapper, Discuss> impl
 
     @Remarks("type == 1, 只显示伪删除的评论")
     @Override
-    public IPage<Discuss> getPage(Page page, int type) {
+    public IPage<Discuss> getPage(Page page, int type, long blogId) {
 
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.orderByDesc("create_time");
-        if(type == 1)
+        queryWrapper.eq("blog_id", blogId);
+        if (type == 1)
             queryWrapper.eq("state", 1);
         return this.page(page, queryWrapper);
     }

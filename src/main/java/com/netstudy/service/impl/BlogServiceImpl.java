@@ -6,6 +6,7 @@ import com.netstudy.bean.User;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.common.utils.normal.LoginUtils;
 import com.netstudy.dao.BlogMapper;
+import com.netstudy.dto.BlogDto;
 import com.netstudy.service.BlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.netstudy.service.CollectService;
@@ -51,12 +52,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     }
 
     @Override
-    public boolean save(HttpServletRequest request, Blog blog) {
+    public boolean save(HttpServletRequest request, BlogDto dto) {
 
         User user = LoginUtils.getUser(request);
-        String content = request.getParameter("content");
-        String contentId = mongoDBServiceImpl.save("blog", content);
-        blog.setUserId(user.getId()).setUserName(user.getUserName()).setContentId(contentId);
+        String contentId = mongoDBServiceImpl.saveBlog("blog", dto);
+        Blog blog = new Blog();
+        blog.setContentId(contentId).setTitle(dto.getTitle()); // .setUserId(user.getId()).setUserName(user.getUserName())
         return super.save(blog);
     }
 

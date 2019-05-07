@@ -2,6 +2,8 @@ package com.netstudy.bean;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -39,6 +41,7 @@ public class MyType implements Serializable {
     /**
      * 当前状态 0 删除 1 正常
      */
+    @TableLogic
     private Integer state;
 
     /**

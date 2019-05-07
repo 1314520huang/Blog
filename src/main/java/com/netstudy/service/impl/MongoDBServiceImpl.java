@@ -2,9 +2,11 @@ package com.netstudy.service.impl;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
+import com.netstudy.bean.Blog;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.common.utils.normal.BeanUtils;
 import com.netstudy.common.utils.normal.StringUtil;
+import com.netstudy.dto.BlogDto;
 import com.netstudy.service.MongoDBService;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -12,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -27,15 +27,18 @@ public class MongoDBServiceImpl implements MongoDBService {
 
     @Remarks("将大存量的内容保存到MongoDB当中")
     @Override
-    public <T> String save(String collectionName, String value) {
+    public <T> String saveBlog(String collectionName, BlogDto dto) {
 
         String contentId = StringUtil.getUUID();
-        Map<String, Object> map = new HashMap<>();
-        map.put("content", value);
-        map.put("contentId", contentId);
-        DBObject dbObject = BeanUtils.beanToDBObject(map);
-        db.getCollection(collectionName).insert(dbObject);
+        dto.setContentId(contentId);
+        db.getCollection(collectionName).insert(BeanUtils.beanToDBObject(dto));
         return contentId;
+    }
+
+    public void test(Blog blog) {
+
+        DBObject dbObject = BeanUtils.beanToDBObject(blog);
+        db.getCollection("test").insert(dbObject);
     }
 
     @Override

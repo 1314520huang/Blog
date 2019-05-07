@@ -1,13 +1,14 @@
 package com.netstudy.common.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- *
  * 解决前后端的跨域问题解决
  */
 @Component
@@ -16,14 +17,36 @@ public class CorsFilter implements Filter {
     final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CorsFilter.class);
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+
         HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        HttpServletRequest request = (HttpServletRequest) req;
+
+        // 不使用*，自动适配跨域域名，避免携带Cookie时失效
+        String origin = request.getHeader("Origin");
+        if (StringUtils.isNotBlank(origin)) {
+            response.setHeader("Access-Control-Allow-Origin", origin);
+        }
+
+        // 自适应所有自定义头
+        String headers = request.getHeader("Access-Control-Request-Headers");
+        if (StringUtils.isNotBlank(headers)) {
+            response.setHeader("Access-Control-Allow-Headers", headers);
+            response.setHeader("Access-Control-Expose-Headers", headers);
+        }
+
+        // 允许跨域的请求方法类型
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        // 预检命令（OPTIONS）缓存时间，单位：秒
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        System.out.println("*********************************过滤器被使用**************************");
-        chain.doFilter(req, res);
+        // 明确许可客户端发送Cookie，不允许删除字段即可
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        chain.doFilter(request, response);
     }
-    public void init(FilterConfig filterConfig) {}
-    public void destroy() {}
+
+    public void init(FilterConfig filterConfig) {
+    }
+
+    public void destroy() {
+    }
 }

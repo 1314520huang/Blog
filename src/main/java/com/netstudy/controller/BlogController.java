@@ -5,6 +5,7 @@ import com.netstudy.common.bean.AjaxResponse;
 import com.netstudy.common.bean.BaseController;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.bean.Blog;
+import com.netstudy.dto.BlogDto;
 import com.netstudy.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,9 @@ public class BlogController extends BaseController {
     @PostMapping("")
     @ResponseBody
     @Remarks("新增博客")
-    public AjaxResponse add(HttpServletRequest request, Blog blog) {
+    public AjaxResponse add(HttpServletRequest request, BlogDto dto) {
 
-        blogServiceImpl.save(request, blog);
+        blogServiceImpl.save(request, dto);
         return new AjaxResponse();
     }
 

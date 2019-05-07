@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface DiscussService extends IService<Discuss> {
 
-    IPage<Discuss> getPage(Page page, int type);
+    IPage<Discuss> getPage(Page page, int type, long blogId);
 
     boolean save(HttpServletRequest request, Discuss discuss);
 }

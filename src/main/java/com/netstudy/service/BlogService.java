@@ -2,6 +2,7 @@ package com.netstudy.service;
 
 import com.netstudy.bean.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.netstudy.dto.BlogDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -19,7 +20,7 @@ public interface BlogService extends IService<Blog> {
 
     Map<String, Object> getDetail(long id);
 
-    boolean save(HttpServletRequest request, Blog blog);
+    boolean save(HttpServletRequest request, BlogDto dto);
 
     List<Blog> list(HttpServletRequest request, int type);
 
