@@ -6,6 +6,7 @@ import com.netstudy.service.UserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import java.util.Set;
  * @since 2019-05-05
  */
 @Service
+@Transactional
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
 
     @Autowired

@@ -6,6 +6,7 @@ import com.netstudy.dao.MyTypeMapper;
 import com.netstudy.service.MyTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * @since 2019-05-05
  */
 @Service
+@Transactional
 public class MyTypeServiceImpl extends ServiceImpl<MyTypeMapper, MyType> implements MyTypeService {
 
     @Override

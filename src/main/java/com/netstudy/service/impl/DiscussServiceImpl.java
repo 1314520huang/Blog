@@ -10,6 +10,7 @@ import com.netstudy.dao.DiscussMapper;
 import com.netstudy.service.DiscussService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2019-05-05
  */
 @Service
+@Transactional
 public class DiscussServiceImpl extends ServiceImpl<DiscussMapper, Discuss> implements DiscussService {
 
     @Remarks("type == 1, 只显示伪删除的评论")

@@ -22,4 +22,6 @@ public interface BlogService extends IService<Blog> {
     boolean save(HttpServletRequest request, Blog blog);
 
     List<Blog> list(HttpServletRequest request, int type);
+
+    List<Blog> search(Blog blog);
 }

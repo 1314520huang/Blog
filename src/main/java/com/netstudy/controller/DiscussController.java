@@ -27,12 +27,13 @@ public class DiscussController {
     @Autowired
     private DiscussService discussServiceImpl;
 
-    @GetMapping("/{type}")
+    @GetMapping("")
     @ResponseBody
     @Remarks("分页获取评论")
-    public AjaxResponse list(int pageIndex, int pageCount, @PathVariable int type) {
+    public AjaxResponse list(int pageIndex, int pageCount, HttpServletRequest request) {
 
         AjaxResponse response = new AjaxResponse();
+        int type = Integer.parseInt(request.getParameter("type"));
         response.setData(discussServiceImpl.getPage(new Page(pageIndex, pageCount), type));
         return response;
     }

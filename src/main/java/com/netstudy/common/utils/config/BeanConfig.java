@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import com.netstudy.common.bean.Remarks;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,4 +27,10 @@ public class BeanConfig {
         return new Jedis("localhost");
     }
 
+    @Remarks(" 注入到IOC容器，统一管理 ")
+    @Bean
+    public MongoDatabase mongoDatabase() {
+
+        return new MongoClient("localhost").getDatabase("blog");
+    }
 }

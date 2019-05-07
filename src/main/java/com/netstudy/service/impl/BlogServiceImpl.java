@@ -9,12 +9,13 @@ import com.netstudy.dao.BlogMapper;
 import com.netstudy.service.BlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.netstudy.service.CollectService;
+import com.netstudy.service.MongoDBService;
 import com.netstudy.service.MyLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,15 @@ import java.util.Map;
  * @since 2019-05-05
  */
 @Service
+@Transactional
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
     @Autowired
     private MyLikeService myLikeServiceImpl;
     @Autowired
     private CollectService collectServiceImpl;
+    @Autowired
+    private MongoDBService mongoDBServiceImpl;
 
     @Remarks("如果type = 1， 代表查询的是自己所发布的博客")
     @Override
@@ -50,7 +54,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     public boolean save(HttpServletRequest request, Blog blog) {
 
         User user = LoginUtils.getUser(request);
-        blog.setUserId(user.getId()).setUserName(user.getUserName());
+        String content = request.getParameter("content");
+        String contentId = mongoDBServiceImpl.save("blog", content);
+        blog.setUserId(user.getId()).setUserName(user.getUserName()).setContentId(contentId);
         return super.save(blog);
     }
 
@@ -58,10 +64,19 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     public Map<String, Object> getDetail(long id) {
 
         Map<String, Object> map = new HashMap<>();
-        map.put("blog", super.getById(id));
+        Blog blog = super.getById(id);
+        map.put("blog", blog);
         map.put("likeSum", myLikeServiceImpl.getCountForLike(id));
         map.put("notLikeSum", myLikeServiceImpl.getCountForNotLike(id));
         map.put("isCollect", collectServiceImpl.findIsLikeByUserIdAndBlogId(12L, id));
+        map.put("content", mongoDBServiceImpl.getContent("blog", blog.getContentId()));
         return map;
+    }
+
+    @Override
+    public List<Blog> search(Blog blog) {
+
+
+        return null;
     }
 }

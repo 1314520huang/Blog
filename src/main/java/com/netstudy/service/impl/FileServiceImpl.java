@@ -5,6 +5,7 @@ import com.netstudy.dao.FileMapper;
 import com.netstudy.service.FileService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2019-05-05
  */
 @Service
+@Transactional
 public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements FileService {
 
 }

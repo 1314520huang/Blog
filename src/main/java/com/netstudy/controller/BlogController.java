@@ -28,12 +28,13 @@ public class BlogController extends BaseController {
     @Autowired
     private BlogService blogServiceImpl;
 
-    @GetMapping("/{type}")
+    @GetMapping("")
     @ResponseBody
     @Remarks("获取所有博客列表， type = 1 代表获取自己的博客")
-    public AjaxResponse list(HttpServletRequest request, @PathVariable int type) {
+    public AjaxResponse list(HttpServletRequest request) {
 
         AjaxResponse response = new AjaxResponse();
+        int type= Integer.parseInt(request.getParameter("type"));
         response.setData(blogServiceImpl.list(request, type));
         return response;
     }
@@ -41,9 +42,9 @@ public class BlogController extends BaseController {
     @PostMapping("")
     @ResponseBody
     @Remarks("新增博客")
-    public AjaxResponse add(Blog blog) {
+    public AjaxResponse add(HttpServletRequest request, Blog blog) {
 
-        blogServiceImpl.save(blog);
+        blogServiceImpl.save(request, blog);
         return new AjaxResponse();
     }
 
@@ -64,5 +65,16 @@ public class BlogController extends BaseController {
 
         blogServiceImpl.removeById(id);
         return new AjaxResponse();
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    @Remarks("查找博客")
+    public AjaxResponse search(Blog blog) {
+
+        AjaxResponse response = new AjaxResponse();
+
+
+        return response;
     }
 }
