@@ -6,6 +6,7 @@ import com.netstudy.common.bean.AjaxResponse;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,5 +37,15 @@ public class CollectController {
 
         collectServiceImpl.addCollect(request, collect);
         return new AjaxResponse();
+    }
+
+    @GetMapping("")
+    @ResponseBody
+    @Remarks("获取登录者的收藏列表")
+    public AjaxResponse list(HttpServletRequest request) {
+
+        AjaxResponse response = new AjaxResponse();
+        response.setData(collectServiceImpl.myCollect(request));
+        return response;
     }
 }

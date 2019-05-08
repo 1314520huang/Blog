@@ -2,8 +2,6 @@ package com.netstudy.bean;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,7 +12,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Chen Huang @ forstudy
- * @since 2019-05-05
+ * @since 2019-05-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -56,8 +54,12 @@ public class Discuss implements Serializable {
     /**
      * 当前状态 0 删除 1 正常
      */
-    @TableLogic
     private Integer state;
+
+    /**
+     * 评论内容
+     */
+    private String content;
 
 
 }

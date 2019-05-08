@@ -1,7 +1,10 @@
 package com.netstudy.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.netstudy.bean.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.netstudy.common.bean.PagedList;
 import com.netstudy.dto.BlogDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,4 +28,6 @@ public interface BlogService extends IService<Blog> {
     List<Blog> list(HttpServletRequest request, int type);
 
     List<Blog> search(Blog blog);
+
+    IPage<Blog> getPage(Page page, HttpServletRequest request, int type);
 }

@@ -74,8 +74,7 @@ public class BlogController extends BaseController {
     public AjaxResponse search(Blog blog) {
 
         AjaxResponse response = new AjaxResponse();
-
-
+        response.setData(blogServiceImpl.search(blog));
         return response;
     }
 }

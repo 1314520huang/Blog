@@ -14,6 +14,7 @@ public class DateUtil {
 
 	private static SimpleDateFormat df;
 	private static final String DATE = "yyyy-MM-dd";
+	private static final String NOWDATE = "yyyyMMdd";
 	private static final String TIME = "yyyy-MM-dd HH:mm:ss";
 	
 	/**
@@ -59,12 +60,20 @@ public class DateUtil {
 		}
 		return date;
 	}
+
+	public static String getNowdateForMongoDB() {
+
+		Date date = new Date();
+		df = new SimpleDateFormat(NOWDATE);
+		return df.format(System.currentTimeMillis());
+	}
 	
 	public static void main(String[] args) {
 
 //		System.out.println(getNowDate());
 //		System.out.println(getNowTime());
 //		System.err.println(getNowDate1());
-		System.out.println(strToDate("2019-03-07"));
+//		System.out.println(strToDate("2019-03-07"));
+		System.out.println(getNowdateForMongoDB());
 	}
 }

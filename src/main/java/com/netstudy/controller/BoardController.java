@@ -2,6 +2,7 @@ package com.netstudy.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.netstudy.bean.Board;
 import com.netstudy.common.bean.AjaxResponse;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.service.BoardService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -41,6 +44,15 @@ public class BoardController {
     public AjaxResponse delete(@PathVariable long id) {
 
         boardServiceImpl.removeById(id);
+        return new AjaxResponse();
+    }
+
+    @PostMapping("")
+    @ResponseBody
+    @Remarks("添加新留言")
+    public AjaxResponse add(HttpServletRequest request, Board board) {
+
+        boardServiceImpl.save(request, board);
         return new AjaxResponse();
     }
 }

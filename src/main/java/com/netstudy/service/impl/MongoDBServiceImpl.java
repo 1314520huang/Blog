@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import com.netstudy.bean.Blog;
 import com.netstudy.common.bean.Remarks;
 import com.netstudy.common.utils.normal.BeanUtils;
+import com.netstudy.common.utils.normal.DateUtil;
 import com.netstudy.common.utils.normal.StringUtil;
 import com.netstudy.dto.BlogDto;
 import com.netstudy.service.MongoDBService;
@@ -16,6 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
+/**
+ * 一天备份一次
+ *
+ */
 @Service
 @Transactional
 public class MongoDBServiceImpl implements MongoDBService {
@@ -31,7 +36,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 
         String contentId = StringUtil.getUUID();
         dto.setContentId(contentId);
-        db.getCollection(collectionName).insert(BeanUtils.beanToDBObject(dto));
+        db.getCollection(collectionName + "-" + DateUtil.getNowdateForMongoDB()).insert(BeanUtils.beanToDBObject(dto));
         return contentId;
     }
 
@@ -45,6 +50,6 @@ public class MongoDBServiceImpl implements MongoDBService {
     public Map<String, Object> getContent(String collectionName, String contentId) {
 
         Bson bson = new Document("contentId", contentId);
-        return (Map<String, Object>)mongoDatabase.getCollection(collectionName).find(bson);
+        return (Map<String, Object>)mongoDatabase.getCollection(collectionName + "-" + DateUtil.getNowdateForMongoDB()).find(bson);
     }
 }

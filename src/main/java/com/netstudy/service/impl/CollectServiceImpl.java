@@ -1,5 +1,6 @@
 package com.netstudy.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.netstudy.bean.Collect;
 import com.netstudy.common.utils.normal.LoginUtils;
 import com.netstudy.dao.CollectMapper;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,5 +40,12 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
     public int findIsLikeByUserIdAndBlogId(long userId, long blogId) {
 
         return collectMapper.findIsLikeByUserIdAndBlogId(userId, blogId);
+    }
+
+    @Override
+    public List<Map<String, Object>> myCollect(HttpServletRequest request) {
+
+        long userId = LoginUtils.getUser(request).getId();
+        return collectMapper.myCollect(userId);
     }
 }

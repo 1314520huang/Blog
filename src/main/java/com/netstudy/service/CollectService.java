@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +21,6 @@ public interface CollectService extends IService<Collect> {
     void addCollect(HttpServletRequest request, Collect collect);
 
     int findIsLikeByUserIdAndBlogId(long userId, long blogId);
+
+    List<Map<String, Object>> myCollect(HttpServletRequest request);
 }

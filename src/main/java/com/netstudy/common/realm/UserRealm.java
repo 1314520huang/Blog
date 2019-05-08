@@ -1,11 +1,10 @@
 package com.netstudy.common.realm;
 
+import com.netstudy.common.bean.Remarks;
+import com.netstudy.common.exception.AIException;
 import com.netstudy.service.UserRoleService;
 import com.netstudy.service.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -26,9 +25,13 @@ public class UserRealm extends AuthorizingRealm {
         super.setName("com.forstudy.common.realm.UserRealm");
     }
 
-    /*
-        用户权限判断， 同时赋权
-     */
+    @Override
+    public String getName() {
+
+        return "com.netstudy.common.realm.UserRealm";
+    }
+
+    @Remarks("用户权限判断， 同时赋权")
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection collection) {
 
@@ -39,19 +42,20 @@ public class UserRealm extends AuthorizingRealm {
         return info;
     }
 
-    /*
-        用户身份判断
-     */
+    @Remarks("用户身份判断")
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
+        SimpleAuthenticationInfo info;
         try {
-
-
-        } catch (Exception e) {
-
-
+            String loginName = (String)token.getCredentials();
+            String password = (String) token.getPrincipal();
+            long userId = userService.login(loginName, password);
+            info = new SimpleAuthenticationInfo(userId, password, getName());
+        } catch (UnknownAccountException e) {
+            throw new AIException("用户名不存在");
+        } catch (IncorrectCredentialsException e) {
+            throw new AIException("账号或密码不正确");
         }
         return info;
     }

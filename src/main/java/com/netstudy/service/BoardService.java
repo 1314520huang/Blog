@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.netstudy.bean.Board;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  * 留言板 服务类
@@ -16,4 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface BoardService extends IService<Board> {
 
     IPage getPage(Page page);
+
+    void save(HttpServletRequest request, Board board);
 }
